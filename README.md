@@ -8,13 +8,13 @@ on Adafruit WS2801 library for regular Python.
 Copy the file to your device, using ampy, webrepl or compiling and deploying. eg.
 
 ```bash
-$ ampy put WS2801.py
+$ ampy put ws2801.py
 ```
 
 **Use a 7 pixel strand and set all LED's red**
 ```python
 from machine import SPI
-from WS2801 import WS2801Pixels
+from ws2801 import WS2801Pixels
 
 spi = SPI(1)
 ws = WS2801Pixels(7, spi)

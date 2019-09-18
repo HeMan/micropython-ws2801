@@ -8,7 +8,7 @@ from setuptools import setup
 setup(
     name="micropython-ws2801",
     py_modules=["ws2801"],
-    version="1.0.0",
+    version="1.0.1",
     description="MicroPython library for WS2801.",
     long_description="This library lets you control strands of WS2801 RGB LEDs.",
     keywords="ws2801 rgb led micropython",
