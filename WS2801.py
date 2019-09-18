@@ -21,15 +21,13 @@
 # SOFTWARE.
 import utime as time
 
-#import Adafruit_GPIO.SPI as SPI
-from machine import SPI
-
 
 def RGB_to_color(r, g, b):
     """Convert three 8-bit red, green, blue component values to a single 24-bit
     color value.
     """
     return ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF)
+
 
 def color_to_RGB(color):
     """Convert a 24-bit color value to 8-bit red, green, blue components.
@@ -38,10 +36,10 @@ def color_to_RGB(color):
     return ((color >> 16) & 0xFF, (color >> 8) & 0xFF, color & 0xFF)
 
 
-class WS2801Pixels(object):
+class WS2801Pixels:
     """WS2801/SPI interface addressable RGB LED lights."""
 
-    def __init__(self, count, spi=None):
+    def __init__(self, count, spi):
         """Initialize set of WS2801/SPI-like addressable RGB LEDs.  Must
         specify the count of pixels, and either an explicit clk (clokc) and do
         (data output) line for software SPI or a spi instance for hardware SPI.
@@ -49,7 +47,7 @@ class WS2801Pixels(object):
         self._spi = spi
         # Setup buffer for pixel RGB data.
         self._count = count
-        self._pixels = bytearray(count*3)
+        self._pixels = bytearray(count * 3)
 
     def show(self):
         """Push the current pixel values out to the hardware.  Must be called to
@@ -77,10 +75,10 @@ class WS2801Pixels(object):
         component values.  Note you MUST call show() after setting pixels to
         see the LEDs change color!
         """
-        assert n >= 0 and n < self._count, 'Pixel n outside the count of pixels!'
-        self._pixels[n*3]   = r & 0xFF
-        self._pixels[n*3+1] = g & 0xFF
-        self._pixels[n*3+2] = b & 0xFF
+        assert n >= 0 and n < self._count, "Pixel n outside the count of pixels!"
+        self._pixels[n * 3] = r & 0xFF
+        self._pixels[n * 3 + 1] = g & 0xFF
+        self._pixels[n * 3 + 2] = b & 0xFF
 
     def get_pixel(self, n):
         """Retrieve the 24-bit RGB color of the specified pixel n."""
@@ -91,8 +89,8 @@ class WS2801Pixels(object):
         """Retrieve the 8-bit red, green, blue component color values of the
         specified pixel n.  Will return a 3-tuple of red, green, blue data.
         """
-        assert n >= 0 and n < self._count, 'Pixel n outside the count of pixels!'
-        return (self._pixels[n*3], self._pixels[n*3+1], self._pixels[n*3+2])
+        assert n >= 0 and n < self._count, "Pixel n outside the count of pixels!"
+        return (self._pixels[n * 3], self._pixels[n * 3 + 1], self._pixels[n * 3 + 2])
 
     def set_pixels(self, color=0):
         """Set all pixels to the provided 24-bit RGB color value.  Note you
