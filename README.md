@@ -11,6 +11,12 @@ Copy the file to your device, using ampy, webrepl or compiling and deploying. eg
 $ ampy put ws2801.py
 ```
 
+or use upip
+```python
+>>> import upip
+>>> upip.install('micropython-ws2800')
+```
+
 **Use a 7 pixel strand and set all LED's red**
 ```python
 from machine import SPI
